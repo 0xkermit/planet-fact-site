@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+
+    <link rel="icon" type="image/png" sizes="32x32" href="" />
+
+    <title>Planet</title>
+  </head>
+
+  <body>
+    <nav>
+      <h1>The Planets</h1>
+      <img id="hamburger" src="./assets/icon-hamburger.svg" />
+
+      <div id="planet-list">
+        <a id="mercury-selector" class="planet-selection" href="#">Mercury</a>
+        <a class="planet-selection" href="#">Venus</a>
+        <a class="planet-selection" href="#">Earth</a>
+        <a class="planet-selection" href="#">Mars</a>
+        <a class="planet-selection" href="#">Jupiter</a>
+        <a class="planet-selection" href="#">Saturn</a>
+        <a class="planet-selection" href="#">Uranus</a>
+        <a class="planet-selection" href="#">Neptune</a>
+      </div>
+    </nav>
+
+    <ul id="menu" class="isHidden">
+      <li class="mobile-planet-selector">
+        <span class="planet-icon mercury-icon"></span>
+        <p>Mercury</p>
+        <img class="chevron" src="./assets/icon-chevron.svg" />
+      </li>
+      <li class="mobile-planet-selector">
+        <span class="planet-icon venus-icon"></span>
+        <p>Venus</p>
+        <img class="chevron" src="./assets/icon-chevron.svg" />
+      </li>
+      <li class="mobile-planet-selector">
+        <span class="planet-icon earth-icon"></span>
+        <p>Earth</p>
+        <img class="chevron" src="./assets/icon-chevron.svg" />
+      </li>
+      <li class="mobile-planet-selector">
+        <span class="planet-icon mars-icon"></span>
+        <p>Mars</p>
+        <img class="chevron" src="./assets/icon-chevron.svg" />
+      </li>
+      <li class="mobile-planet-selector">
+        <span class="planet-icon jupiter-icon"></span>
+        <p>Jupiter</p>
+        <img class="chevron" src="./assets/icon-chevron.svg" />
+      </li>
+      <li class="mobile-planet-selector">
+        <span class="planet-icon saturn-icon"></span>
+        <p>Saturn</p>
+        <img class="chevron" src="./assets/icon-chevron.svg" />
+      </li>
+      <li class="mobile-planet-selector">
+        <span class="planet-icon uranus-icon"></span>
+        <p>Uranus</p>
+        <img class="chevron" src="./assets/icon-chevron.svg" />
+      </li>
+      <li class="mobile-planet-selector">
+        <span class="planet-icon neptune-icon"></span>
+        <p>Neptune</p>
+        <img class="chevron" src="./assets/icon-chevron.svg" />
+      </li>
+    </ul>
+
+    <nav id="planet-info">
+      <p class="planet-tab selected" id="overview">Overview</p>
+      <p class="planet-tab" id="internal-structure">
+        Internal <br />
+        Structure
+      </p>
+      <p class="planet-tab" id="surface-geoglogy">
+        Surface <br />
+        Geoglogy
+      </p>
+    </nav>
+    <br />
+    <br />
+
+    <div id="planet-overview">
+      <img id="planet-image" />
+      <div class="everything-but-image">
+        <div>
+          <br />
+          <h2 id="planet-name"></h2>
+          <br />
+          <p id="planet-content"></p>
+          <br />
+          <div class="sources">
+            <p>Source:</p>
+            <a id="planet-source">Wikipedia</a>
+            <img src="assets/icon-source.svg" />
+          </div>
+          <br />
+        </div>
+        <div class="button-container">
+          <button class="type-selector" id="overview-button">Overview</button>
+          <button class="type-selector" id="internal-button">Internal</button>
+          <button class="type-selector" id="geology-button">Geoglogy</button>
+        </div>
+      </div>
+      <ul id="planet-stats">
+        <li>
+          <p>Rotation Time</p>
+          <h2 id="rotation-time">0.99 Days</h2>
+        </li>
+        <li>
+          <p>Revolution Time</p>
+          <h2 id="revolution-time">365.26 Days</h2>
+        </li>
+        <li>
+          <p>Radius</p>
+          <h2 id="radius">6,371 KM</h2>
+        </li>
+        <li>
+          <p>Average Temp.</p>
+          <h2 id="average-temp">16°c</h2>
+        </li>
+      </ul>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
