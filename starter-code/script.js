@@ -1,8 +1,6 @@
 const hamburger = document.getElementById("hamburger");
 const menu = document.getElementById("menu");
 const overview = document.getElementById("overview");
-const internalStructure = document.getElementById("internal-structure");
-const surfaceGeoglogy = document.getElementById("surface-geoglogy");
 const planetInfo = document.getElementById("planet-info");
 const planetTab = document.querySelectorAll(".planet-tab");
 const planetSelection = document.querySelectorAll(".planet-selection");
@@ -14,16 +12,15 @@ const rotationTime = document.getElementById("rotation-time");
 const revolutionTime = document.getElementById("revolution-time");
 const radius = document.getElementById("radius");
 const averageTemp = document.getElementById("average-temp");
-const mercurySelector = document.getElementById("mercury-selector");
+const planetList = document.getElementById("planet-list");
+
 const overviewButton = document.getElementById("overview-button");
 const internalButton = document.getElementById("internal-button");
 const geologyButton = document.getElementById("geology-button");
-const mobilePlanetSelector = document.querySelectorAll(
-  ".mobile-planet-selector"
-);
-console.log(mobilePlanetSelector);
-let currentPlanet = "0";
+
 let type = "overview";
+let currentPlanet = 0;
+
 const data = [
   {
     name: "Mercury",
@@ -252,15 +249,20 @@ const data = [
     },
   },
 ];
+createDesktopPlanets();
+createMobilePlanets();
+const mobilePlanetSelector = document.querySelectorAll(
+  ".mobile-planet-selector"
+);
 
-// add color property to each one for the circle thing for the menu
+refresh();
+window.onhashchange = () => {
+  refresh();
+  changingContent(currentPlanet, type);
+};
 
 let isMenuOpen = false;
 
-data.forEach((planet, index) => {
-  // create mobile menu
-  console.log(planet.name);
-});
 hamburger.addEventListener("click", () => {
   if (!isMenuOpen) {
     menu.classList.remove("isHidden");
@@ -294,11 +296,48 @@ planetTab.forEach((tab) => {
   });
 });
 changingContent(currentPlanet, type);
-mercurySelector.classList.add("selectedPlanet");
-mercurySelector.style.borderBottomColor = data[0].color;
-mercurySelector.style.color = data[0].color;
+
+data.forEach((planet, index) => {
+  if (index === currentPlanet) {
+    const planetClicked = document.getElementById(planet.name.toLowerCase());
+    planetClicked.classList.add("selectedPlanet");
+    planetClicked.style.borderBottomColor = data[index].color;
+    planetClicked.style.color = data[index].color;
+  }
+});
+
+function refresh() {
+  const planetSelected = location.hash.split("");
+  planetSelected.shift();
+
+  const planetIndex = data.findIndex((e) => {
+    if (e.name === planetSelected.join("")) {
+      return location.hash;
+    }
+  });
+  if (planetIndex === -1) {
+    currentPlanet = 0;
+  } else {
+    currentPlanet = planetIndex;
+  }
+  data.forEach((planet, index) => {
+    if (index === currentPlanet) {
+      const selectedPlanet = document.querySelector(".selectedPlanet");
+
+      if (selectedPlanet) {
+        selectedPlanet.classList.remove("selectedPlanet");
+        selectedPlanet.style.borderBottomColor = "transparent";
+        selectedPlanet.style.color = "rgb(134, 134, 134)";
+      }
+      const planetClicked = document.getElementById(planet.name.toLowerCase());
+      planetClicked.classList.add("selectedPlanet");
+      planetClicked.style.borderBottomColor = data[index].color;
+      planetClicked.style.color = data[index].color;
+    }
+  });
+}
+
 planetSelection.forEach((planetClicked, i) => {
-  console.log(data.length);
   planetClicked.addEventListener("click", () => {
     const selectedPlanet = document.querySelector(".selectedPlanet");
 
@@ -312,15 +351,6 @@ planetSelection.forEach((planetClicked, i) => {
     planetClicked.style.color = data[i].color;
     currentPlanet = i;
     changingContent(currentPlanet, type);
-  });
-});
-
-mobilePlanetSelector.forEach((planetClicked, i) => {
-  planetClicked.addEventListener("click", () => {
-    currentPlanet = i;
-    changingContent(currentPlanet, type);
-    menu.classList.add("isHidden");
-    planetInfo.classList.remove("isHidden");
   });
 });
 
@@ -363,7 +393,51 @@ function changingContent(planetId, type) {
   }
   planetName.innerText = data[planetId].name;
   rotationTime.innerText = data[planetId].rotation;
-  revolutionTime.innertext = data[planetId].revolution;
+  revolutionTime.innerText = data[planetId].revolution;
   radius.innerText = data[planetId].radius;
   averageTemp.innerText = data[planetId].temperature;
+}
+
+function createDesktopPlanets() {
+  data.forEach((item) => {
+    const planet = document.createElement("a");
+    planet.classList.add("planet-selection");
+
+    planet.setAttribute("id", item.name.toLowerCase());
+    planet.href = `#${item.name}`;
+    planet.innerText = item.name;
+    planetList.appendChild(planet);
+  });
+}
+function createMobilePlanets() {
+  data.forEach((item, index) => {
+    const li = document.createElement("li");
+    li.classList.add("mobile-planet-selector");
+
+    const a = document.createElement("a");
+    a.classList.add("mobile-planet");
+    a.href = `#${item.name}`;
+
+    const span = document.createElement("span");
+    span.classList.add("planet-icon");
+    span.classList.add(`${item.name.toLowerCase()}-icon`);
+
+    const p = document.createElement("p");
+    p.innerText = item.name;
+
+    const img = document.createElement("img");
+    img.classList.add("chevron");
+    img.setAttribute("src", "./assets/icon-chevron.svg");
+    li.addEventListener("click", () => {
+      currentPlanet = index;
+      changingContent(currentPlanet, type);
+      menu.classList.add("isHidden");
+      planetInfo.classList.remove("isHidden");
+    });
+    a.appendChild(span);
+    a.appendChild(p);
+    a.appendChild(img);
+    li.appendChild(a);
+    menu.appendChild(li);
+  });
 }

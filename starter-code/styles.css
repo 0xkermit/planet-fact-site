@@ -30,6 +30,11 @@ nav {
   border-width: 1px;
 }
 
+.mobile-planet {
+  display: flex;
+  width: 100%;
+}
+
 #planet-info {
   align-items: center;
   flex-direction: row;
@@ -194,7 +199,6 @@ span {
   .everything-but-image {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
   }
 
@@ -218,9 +222,6 @@ span {
     display: block;
     margin: auto;
     width: 350px;
-  }
-  #planet-content {
-    width: 50%;
   }
 
   #planet-stats li {
@@ -295,6 +296,13 @@ span {
 }
 
 @media (min-width: 1024px) {
+  .image-wrapper {
+    flex: 1;
+  }
+  #planet-image {
+    width: 50%;
+    margin-right: 70px;
+  }
   h1 {
     margin: 0;
     margin-left: 10px;
@@ -309,5 +317,26 @@ span {
   }
   #planet-list a {
     margin: 0px 15px 0px 15px;
+  }
+
+  #planet-overview {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .everything-but-image {
+    flex-direction: column;
+    text-align: left;
+    flex: 1;
+    align-items: flex-start;
+  }
+
+  .button-container {
+    left: 0;
+  }
+
+  #planet-stats {
+    margin-top: 100px;
   }
 }
