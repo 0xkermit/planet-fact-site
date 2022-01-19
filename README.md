@@ -1,4 +1,4 @@
-# Frontend Mentor - Planets fact site
+# Frontend Mentor - Planets cap 🎓 site
 
 ![Design preview for the Planets fact site coding challenge](./preview.jpg)
 
